@@ -96,8 +96,8 @@ public class menu {
         String email = solicitarDato("Ingrese email");
         String contrasena = solicitarDato("Ingrese contraseña");
 
-        boolean dificultadAuditiva = solicitarBoolean("¿Tiene dificultad auditiva? (true/false)");
-        boolean manejaLenguajeDeSenias = solicitarBoolean("¿Maneja lenguaje de señas? (true/false)");
+        boolean dificultadAuditiva = solicitarBoolean("¿Tiene dificultad auditiva? (si/no)");
+        boolean manejaLenguajeDeSenias = solicitarBoolean("¿Maneja lenguaje de señas? (si/no)");
 
         List<String> telefonos = solicitarTelefonos();
 
@@ -116,8 +116,10 @@ public class menu {
 
     private boolean solicitarBoolean(String mensaje) {
         System.out.print("╔═ " + mensaje + ": ");
-        return scanner.nextBoolean();
+        String entrada = scanner.nextLine().toLowerCase().trim();
+        return entrada.equals("si");
     }
+
 
     private List<String> solicitarTelefonos() {
         List<String> telefonos = new ArrayList<>();
