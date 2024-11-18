@@ -1,4 +1,5 @@
 package MODELO;
+import java.util.List;
 
 public class Perfil {
 
@@ -6,11 +7,13 @@ public class Perfil {
     private String nombre;
     private String descripcion;
     private Boolean estado;
+    private List<Usuario> usuarios;
 
-    public Perfil(String nombre, String descripcion, Boolean estado) {
+    public Perfil(String nombre, String descripcion, Boolean estado, List<Usuario> usuarios) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;
+        this.usuarios = usuarios;
     }
 
     public Long getId() {
