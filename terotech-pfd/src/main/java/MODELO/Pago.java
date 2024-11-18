@@ -19,7 +19,6 @@ public class Pago {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -27,7 +26,6 @@ public class Pago {
     public Date getFecha() {
         return fecha;
     }
-
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
@@ -35,7 +33,6 @@ public class Pago {
     public Float getMonto() {
         return monto;
     }
-
     public void setMonto(Float monto) {
         this.monto = monto;
     }
@@ -43,7 +40,6 @@ public class Pago {
     public Usuario getUsuario() {
         return usuario;
     }
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
