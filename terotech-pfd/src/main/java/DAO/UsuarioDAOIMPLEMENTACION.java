@@ -21,7 +21,10 @@ public class UsuarioDAOIMPLEMENTACION implements UsuarioDAO {
     }
 
     @Override
-    public void agregar(Usuario usuario) {
+    public boolean agregar(Usuario usuario) {
+
+    return false;
+
     }
 
     @Override

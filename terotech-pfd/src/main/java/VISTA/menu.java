@@ -24,21 +24,22 @@ public class menu {
         System.out.println("╚══════════════════════════════════════╝");
     }
 
-    public boolean mostrarMenuInicioSesion() {
+    public int mostrarMenuInicioSesion() {
         System.out.println("╔══════════════════════════════════════╗");
         System.out.println("║        Sistema de gestión de ASUR    ║");
         System.out.println("╠══════════════════════════════════════╣");
         System.out.println("║             Inicio de Sesión         ║");
         System.out.println("╠══════════════════════════════════════╣");
         System.out.println("║         1. Iniciar Sesión            ║");
-        System.out.println("║         2. Salir                     ║");
+        System.out.println("║         2. Pre-registro              ║");
+        System.out.println("║         3. Salir                     ║");
         System.out.println("╚══════════════════════════════════════╝");
 
         System.out.print("Seleccione una opción: ");
         int opcion = scanner.nextInt();
         scanner.nextLine();
 
-        boolean resultado = false;
+        int resultado = 0;
 
         switch (opcion) {
             case 1:
@@ -61,18 +62,28 @@ public class menu {
                 try {
                     Thread.sleep(2000);
                     for (int i = 0; i < 50; ++i) System.out.println();
-                    resultado = true;
+                    resultado = 1;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 break;
             case 2:
-                System.out.println("Saliendo del sistema...");
-                resultado = false;
+                try {
+                    Thread.sleep(2000);
+                    for (int i = 0; i < 50; ++i) System.out.println();
+                    this.mostrarFormularioRegistro();
+                    resultado = 2;
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 3:
+                System.exit(0);
                 break;
             default:
                 System.out.println("Opción no válida.");
-                resultado = false;
+                resultado = 0;
                 break;
         }
 
@@ -86,7 +97,7 @@ public class menu {
 
         String nombres = solicitarDato("Ingrese nombres");
         String apellidos = solicitarDato("Ingrese apellidos");
-        String tipoDocumento = solicitarDato("Ingrese tipo de documento");
+        String tipoDocumento = solicitarDato("Ingrese tipo de documento (CI, DNI, PASAPORTE U OTRO");
         String numeroDocumento = solicitarDato("Ingrese número de documento");
 
         String fechaStr = solicitarDato("Ingrese fecha de nacimiento (dd-MM-yyyy)");
@@ -124,8 +135,6 @@ public class menu {
     private List<String> solicitarTelefonos() {
         List<String> telefonos = new ArrayList<>();
         String telefono;
-        scanner.nextLine(); // Limpiar el salto de línea
-
         do {
             System.out.print("╔═ Ingrese teléfono (deje vacío para terminar): ");
             telefono = scanner.nextLine();
@@ -167,5 +176,8 @@ public class menu {
         System.out.println("║ Maneja Lenguaje de Señas: " + manejaLenguajeDeSenias);
         System.out.println("║ Teléfonos: " + telefonos);
         System.out.println("╚══════════════════════════════════════╝");
+        System.exit(0);
+
+
     }
 }
