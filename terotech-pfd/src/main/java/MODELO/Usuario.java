@@ -134,6 +134,9 @@ public class Usuario {
         this.manejaLenguajeDeSenias = manejaLenguajeDeSenias;
     }
 
+//    hay que ver que onda entre esto y la base de datos
+//    deberian tener casi los mismos campos (lo necesito para terminar UsuarioDAO.agregarUsuario())
+
     public Subcomision getSubcomision() {
         return subcomision;
     }

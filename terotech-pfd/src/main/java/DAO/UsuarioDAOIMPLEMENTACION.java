@@ -3,6 +3,9 @@ import CONTROLADOR.Conexion;
 import DAO.UsuarioDAO;
 import MODELO.Usuario;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +15,16 @@ import java.util.List;
 public class UsuarioDAOIMPLEMENTACION implements UsuarioDAO {
     Conexion conexion;
 
-    {
-        try {
-            conexion = Conexion.obtenerInstancia();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    try {
+        conexion = Conexion.obtenerInstancia();
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
 
     @Override
     public boolean agregar(Usuario usuario) {
 
-    return false;
-
+        return false;
     }
 
     @Override
