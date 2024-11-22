@@ -103,13 +103,16 @@ public class menu {
         String fechaStr = solicitarDato("Ingrese fecha de nacimiento (dd-MM-yyyy)");
         Date fechaNacimiento = cambiarFormatoFecha(fechaStr);
 
-        String domicilio = solicitarDato("Ingrese domicilio");
+        // SOLICITUD DE DATOS DE DOMICILIO
+        Domicilio domicilio = this.solicitarDatosDomicilio();
+
         String email = solicitarDato("Ingrese email");
         String contrasena = solicitarDato("Ingrese contraseña");
 
         boolean dificultadAuditiva = solicitarBoolean("¿Tiene dificultad auditiva? (si/no)");
         boolean manejaLenguajeDeSenias = solicitarBoolean("¿Maneja lenguaje de señas? (si/no)");
 
+        // SOLICITUD DE DATOS DE CONTACTO
         List<String> telefonos = solicitarTelefonos();
 
         mostrarResumenDatos(nombres, apellidos, tipoDocumento, numeroDocumento, fechaNacimiento,
@@ -131,17 +134,62 @@ public class menu {
         return entrada.equals("si");
     }
 
+    private Domicilio solicitarDatosDomicilio(){
+        Domicilio domicilio = new Domicilio();
 
-    private List<String> solicitarTelefonos() {
-        List<String> telefonos = new ArrayList<>();
-        String telefono;
+        System.out.println("Ingrese datos de domicilio");
+        String domicilioCalle = solicitarDato("Ingrese calle");
+        this.domicilio.setCalle(domicilioCalle);
+        String domicilioNumero = solicitarDato("Ingrese numero de puerta");
+        this.domicilio.setNumero(domicilioNumero);
+        String domicilioApto = solicitarDato("Si es necesesario, ingrese numero apartamento, de lo contrario continue");
+        this.domicilio.setApto(domicilioApto);
+
+        return domicilio;
+    }
+
+    private List<Telefono> solicitarTelefonos() {
+        List<Telefono> telefonos = new ArrayList<>();
+        Boolean agregarNuevoTel;
         do {
-            System.out.print("╔═ Ingrese teléfono (deje vacío para terminar): ");
-            telefono = scanner.nextLine();
-            if (!telefono.isEmpty()) {
-                telefonos.add(telefono);
+            Telefono nuevoTel = new Telefono();
+
+            System.out.print("╔═ Ingrese pais: ");
+            pais = scanner.nextLine();
+            if (!pais.isEmpty()) {
+                nuevoTel.setPais(pais);
             }
-        } while (!telefono.isEmpty());
+
+            System.out.print("╔═ Ingrese localidad: ");
+            localidad = scanner.nextLine();
+            if (!localidad.isEmpty()) {
+                nuevoTel.setLocalidad(localidad);
+            }
+
+            System.out.print("╔═ Ingrese numero: ");
+            numero = scanner.nextLine();
+            if (!numero.isEmpty()) {
+                nuevoTel.setNumero(numero);
+            }
+
+            System.out.print("╔═ Ingrese tipo de telefono (celular/telefono fijo): ");
+            tipoTelefono = scanner.nextLine();
+            if (!tipoTelefono.isEmpty()) {
+                nuevoTel.setTipoTelefono(tipoTelefono);
+            }
+
+            telefonos.add(nuevoTel);
+
+            if(telefonos.size() >= 1){
+                System.out.print("╔═ Desea ingresar otro telefono? Si/No: ");
+                ingresarTelefono = scanner.nextLine();
+                if(ingresarTelefono == 'Si'){
+                    agregarNuevoTel = true;
+                } else{
+                    agregarNuevoTel = false;
+                }
+            }
+        } while (agregarNuevoTel);
 
         return telefonos;
     }
@@ -169,12 +217,12 @@ public class menu {
         System.out.println("║ Tipo de Documento: " + tipoDocumento);
         System.out.println("║ Número de Documento: " + numeroDocumento);
         System.out.println("║ Fecha de Nacimiento: " + fechaNacimiento);
-        System.out.println("║ Domicilio: " + domicilio);
+        System.out.println("║ Domicilio: " + domicilio.toString();
         System.out.println("║ Email: " + email);
         System.out.println("║ Contraseña: " + contrasena);
         System.out.println("║ Dificultad Auditiva: " + dificultadAuditiva);
         System.out.println("║ Maneja Lenguaje de Señas: " + manejaLenguajeDeSenias);
-        System.out.println("║ Teléfonos: " + telefonos);
+        System.out.println("║ Teléfonos: " + telefonos.toString());
         System.out.println("╚══════════════════════════════════════╝");
         System.exit(0);
 

@@ -11,17 +11,16 @@ import java.sql.*;
 public class PagoDAOIMPLEMENTACION implements PagoDAO {
     Conexion conexion;
 
-    {
-        try {
-            conexion = Conexion.obtenerInstancia();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    try {
+        conexion = Conexion.obtenerInstancia();
+    } catch (SQLException e) {
+        System.out.println("Error al obtener la conexion");
+        throw new RuntimeException(e);
     }
 
     @Override
     public void ingresar(Pago pago) {
-        
+            
     }
 
     @Override

@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d47ce5-3a3c-4e5e-bec9-e96fa61c5016" name="Default Changelist" comment="" />
+    <list default="true" id="60d47ce5-3a3c-4e5e-bec9-e96fa61c5016" name="Default Changelist" comment="ARRANCAMO con lo lindo (usuarioDAO, Comentarios en Usuario, UsuarioDAOIMPLEMENTACION)">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/terotech-pfd/src/main/java/DAO/PagoDAOIMPLEMENTACION.java" beforeDir="false" afterPath="$PROJECT_DIR$/terotech-pfd/src/main/java/DAO/PagoDAOIMPLEMENTACION.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/terotech-pfd/src/main/java/VISTA/menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/terotech-pfd/src/main/java/VISTA/menu.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,8 +43,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/gonzaor/terotech-pfd&quot;,
-    &quot;accountId&quot;: &quot;b7a20f93-06c2-4d3f-b36b-245648d1119a&quot;
+    &quot;url&quot;: &quot;https://github.com/gonzaor/terotech-pfd.git&quot;,
+    &quot;accountId&quot;: &quot;f56b1691-b871-44e9-b63d-88cdb7713516&quot;
   }
 }</component>
   <component name="IdeDocumentHistory">
@@ -61,6 +66,7 @@
     <option name="height" value="948" />
   </component>
   <component name="ProjectId" id="2op2kSldp4EzF5cHK0poulasxdY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -85,34 +91,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/gonza/IdeaProjects/terotech-pfd/terotech-pfd",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.main.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gonza/IdeaProjects/terotech-pfd/terotech-pfd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main" />
-      <module name="IdeaProjects" />
+      <module name="PFD-Tero" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -121,8 +122,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
       </set>
     </attachedChunks>
   </component>
@@ -142,7 +143,19 @@
       <workItem from="1731552454260" duration="1942000" />
       <workItem from="1731612478140" duration="28000" />
       <workItem from="1731961250743" duration="26000" />
+      <workItem from="1732193996658" duration="11211000" />
+      <workItem from="1732285236427" duration="4743000" />
+      <workItem from="1732308033514" duration="2447000" />
     </task>
+    <task id="LOCAL-00001" summary="ARRANCAMO con lo lindo (usuarioDAO, Comentarios en Usuario, UsuarioDAOIMPLEMENTACION)">
+      <option name="closed" value="true" />
+      <created>1732207255321</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732207255321</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -184,6 +197,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ARRANCAMO con lo lindo (usuarioDAO, Comentarios en Usuario, UsuarioDAOIMPLEMENTACION)" />
+    <option name="LAST_COMMIT_MESSAGE" value="ARRANCAMO con lo lindo (usuarioDAO, Comentarios en Usuario, UsuarioDAOIMPLEMENTACION)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/CONTROLADOR/Conexion.java">
