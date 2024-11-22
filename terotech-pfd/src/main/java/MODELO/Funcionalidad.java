@@ -1,25 +1,23 @@
 package MODELO;
 import java.util.List;
 
-public class Perfil {
-
+public class Funcionalidad {
     private Long id;
     private String nombre;
     private String descripcion;
-    private Boolean estado;
-    private List<Usuario> usuarios;
-    private List<Funcionalidad> funcionalidades;
+    private boolean estado;
+    private List<Perfil> perfiles;
 
-    public Perfil(String nombre, String descripcion, Boolean estado, List<Usuario> usuarios) {
+    public Funcionalidad(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.estado = estado;
-        this.usuarios = usuarios;
+        this.estado = false;
     }
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -27,6 +25,7 @@ public class Perfil {
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -34,24 +33,24 @@ public class Perfil {
     public String getDescripcion() {
         return descripcion;
     }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public Boolean getEstado() {
+    public boolean isEstado() {
         return estado;
     }
-    public void setEstado(Boolean estado) {
+
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
-    public List<Funcionalidad> getFuncionalidades() {
-        return funcionalidades;
+    public List<Perfil> getPerfiles() {
+        return perfiles;
     }
 
-    public void setFuncionalidades(List<Funcionalidad> funcionalidades) {
-        this.funcionalidades = funcionalidades;
+    public void setPerfiles(List<Perfil> perfiles) {
+        this.perfiles = perfiles;
     }
-
 }
-

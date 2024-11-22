@@ -9,5 +9,8 @@ public interface PerfilDAO {
     List<Perfil> obtenerTodosLosPerfiles();
     void actualizarPerfil(Perfil perfil);
     void eliminarPerfil(String nombre);
+    int retornarPerfilUsuario(int documento);
+
+
 }
 
