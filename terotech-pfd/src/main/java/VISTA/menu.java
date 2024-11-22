@@ -114,7 +114,8 @@ public class menu {
 
         // SOLICITUD DE DATOS DE CONTACTO
         List<String> telefonos = solicitarTelefonos();
-
+        //**************************PENDIENTE***********************************
+        //Agregar metodo toString() en clase Telefono y en clase Dmicilio para facilitar el resumen de datos
         mostrarResumenDatos(nombres, apellidos, tipoDocumento, numeroDocumento, fechaNacimiento,
                 domicilio, email, contrasena, dificultadAuditiva, manejaLenguajeDeSenias, telefonos);
 
@@ -217,11 +218,15 @@ public class menu {
         System.out.println("║ Tipo de Documento: " + tipoDocumento);
         System.out.println("║ Número de Documento: " + numeroDocumento);
         System.out.println("║ Fecha de Nacimiento: " + fechaNacimiento);
+        //**************************PENDIENTE***********************************
+        //Ya utilizando el metodo toString() que todavia no está creado
         System.out.println("║ Domicilio: " + domicilio.toString();
         System.out.println("║ Email: " + email);
         System.out.println("║ Contraseña: " + contrasena);
         System.out.println("║ Dificultad Auditiva: " + dificultadAuditiva);
         System.out.println("║ Maneja Lenguaje de Señas: " + manejaLenguajeDeSenias);
+        //**************************PENDIENTE***********************************
+        //Ya utilizando el metodo toString() que todavia no está creado
         System.out.println("║ Teléfonos: " + telefonos.toString());
         System.out.println("╚══════════════════════════════════════╝");
         System.exit(0);
