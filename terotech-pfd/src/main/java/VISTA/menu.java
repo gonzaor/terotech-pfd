@@ -149,49 +149,49 @@ public class menu {
     }
 
     private List<Telefono> solicitarTelefonos() {
-        List<Telefono> telefonos = new ArrayList<>();
-        Boolean agregarNuevoTel;
-        do {
-            Telefono nuevoTel = new Telefono();
+            List<Telefono> telefonos = new ArrayList<>();
+            Boolean agregarNuevoTel;
+            do {
+                Telefono nuevoTel = new Telefono();
 
-            System.out.print("╔═ Ingrese pais: ");
-            pais = scanner.nextLine();
-            if (!pais.isEmpty()) {
-                nuevoTel.setPais(pais);
-            }
-
-            System.out.print("╔═ Ingrese localidad: ");
-            localidad = scanner.nextLine();
-            if (!localidad.isEmpty()) {
-                nuevoTel.setLocalidad(localidad);
-            }
-
-            System.out.print("╔═ Ingrese numero: ");
-            numero = scanner.nextLine();
-            if (!numero.isEmpty()) {
-                nuevoTel.setNumero(numero);
-            }
-
-            System.out.print("╔═ Ingrese tipo de telefono (celular/telefono fijo): ");
-            tipoTelefono = scanner.nextLine();
-            if (!tipoTelefono.isEmpty()) {
-                nuevoTel.setTipoTelefono(tipoTelefono);
-            }
-
-            telefonos.add(nuevoTel);
-
-            if(telefonos.size() >= 1){
-                System.out.print("╔═ Desea ingresar otro telefono? Si/No: ");
-                ingresarTelefono = scanner.nextLine();
-                if(ingresarTelefono == 'Si'){
-                    agregarNuevoTel = true;
-                } else{
-                    agregarNuevoTel = false;
+                System.out.print("╔═ Ingrese pais: ");
+                pais = scanner.nextLine();
+                if (!pais.isEmpty()) {
+                    nuevoTel.setPais(pais);
                 }
-            }
-        } while (agregarNuevoTel);
 
-        return telefonos;
+                System.out.print("╔═ Ingrese localidad: ");
+                localidad = scanner.nextLine();
+                if (!localidad.isEmpty()) {
+                    nuevoTel.setLocalidad(localidad);
+                }
+
+                System.out.print("╔═ Ingrese numero: ");
+                numero = scanner.nextLine();
+                if (!numero.isEmpty()) {
+                    nuevoTel.setNumero(numero);
+                }
+
+                System.out.print("╔═ Ingrese tipo de telefono (celular/telefono fijo): ");
+                tipoTelefono = scanner.nextLine();
+                if (!tipoTelefono.isEmpty()) {
+                    nuevoTel.setTipoTelefono(tipoTelefono);
+                }
+
+                telefonos.add(nuevoTel);
+
+                if(telefonos.size() >= 1){
+                    System.out.print("╔═ Desea ingresar otro telefono? Si/No: ");
+                    ingresarTelefono = scanner.nextLine();
+                    if(ingresarTelefono == 'Si'){
+                        agregarNuevoTel = true;
+                    } else{
+                        agregarNuevoTel = false;
+                    }
+                }
+            } while (agregarNuevoTel);
+
+            return telefonos;
     }
 
     private Date cambiarFormatoFecha(String fechaStr) {
