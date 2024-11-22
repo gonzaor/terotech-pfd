@@ -1,11 +1,10 @@
 package MODELO;
 import java.util.Date;
 import java.util.List;
-import MODELO.*;
-import java.util.*;
 
 
 public class Usuario {
+    private int id;
     private String nombres;
     private String apellidos;
     private String tipoDocumento;
@@ -20,6 +19,34 @@ public class Usuario {
     private boolean dificultadAuditiva;
     private boolean manejaLenguajeDeSenias;
     private Subcomision subcomision;
+    private String estado;
+
+    public int getId(int id) {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private String nombrePerfil;
+
+    public String getNombrePerfil() {
+        return this.nombrePerfil;
+    }
+
+    public void setNombrePerfil(String nombrePerfil) {
+        this.nombrePerfil = nombrePerfil;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     private Perfil perfil;
 
     public Perfil getPerfil() {
