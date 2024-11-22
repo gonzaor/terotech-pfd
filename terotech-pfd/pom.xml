@@ -17,11 +17,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.cdimascio</groupId>
-            <artifactId>dotenv-java</artifactId>
-            <version>3.0.0</version> <!-- Aquí debes usar la versión más reciente (o la que prefieras) -->
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version> <!-- O la versión más reciente -->
         </dependency>
+
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

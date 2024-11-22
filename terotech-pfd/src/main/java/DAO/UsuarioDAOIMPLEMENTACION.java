@@ -1,13 +1,11 @@
 package DAO;
 import CONTROLADOR.Conexion;
+import MODELO.Telefono;
 import MODELO.Usuario;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class UsuarioDAOIMPLEMENTACION implements UsuarioDAO {
     private Conexion conexion;
@@ -20,27 +18,55 @@ public class UsuarioDAOIMPLEMENTACION implements UsuarioDAO {
         }
     }
 
-    private static final String INSERT_SCRIPT = "INSERT INTO usuarios (documento, tipoDocumento, nombre, apellido, correo, id_direccion, id_estado, id_perfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String DELETE_SCRIPT = "DELETE FROM usuarios WHERE documento = ?";
     private static final String GET_USUARIO_SCRIPT = "SELECT * FROM usuarios WHERE documento = ?";
     private static final String GET_ALL_USUARIOS_SCRIPT = "SELECT * FROM usuarios";
 
     @Override
+
     public void agregarUsuario(Usuario usuario) throws SQLException {
+        int id_direccion = 0;
+        if (usuario.getDomicilio() != null) {
+            DireccionDAO direccionDAO = new DireccionDAOImplementacion();
+            id_direccion = direccionDAO.agregarDireccion(usuario.getDomicilio());
+        }
+
+        String INSERT_USUARIO = "INSERT INTO USUARIOS (tipo_documento, nro_documento, nombre, apellido, fecha_nacimiento, correo, contraseña, id_direccion, estado, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        int id_usuario = 0;
         try (Connection connection = conexion.getConexion();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SCRIPT)) {
-            preparedStatement.setString(1, usuario.getNumeroDocumento());
-            preparedStatement.setString(2, usuario.getTipoDocumento());
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USUARIO, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, usuario.getTipoDocumento());
+            preparedStatement.setInt(2, Integer.parseInt(usuario.getNumeroDocumento()));
             preparedStatement.setString(3, usuario.getNombres());
             preparedStatement.setString(4, usuario.getApellidos());
-            preparedStatement.setString(5, usuario.getEmail());
-            preparedStatement.setString(6, usuario.getDomicilio());
-            preparedStatement.setString(7, usuario.getEstado()); // Inactivo
-            preparedStatement.setString(8, usuario.getNombrePerfil()); // Se llama a la funcion de perfil que retorna su id.
+            preparedStatement.setDate(5, new java.sql.Date(usuario.getFechaNacimiento().getTime()));
+            preparedStatement.setString(6, usuario.getEmail());
+            preparedStatement.setString(7, usuario.getContrasena());
+            preparedStatement.setInt(8, id_direccion);
+            preparedStatement.setString(9, usuario.getEstado());
+            preparedStatement.setString(10, usuario.getTipoUsuario());
             preparedStatement.executeUpdate();
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    id_usuario = generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("No se pudo obtener el ID del usuario insertado.");
+                }
+            }
+        }
+
+        if (usuario.getTelefonos() != null && !usuario.getTelefonos().isEmpty()) {
+            TelefonoDAO telefonoDAO = new TelefonoDAOImplementacion();
+            for (Telefono telefono : usuario.getTelefonos()) {
+                telefono.setIdUsuario(id_usuario);
+                telefonoDAO.agregarTelefono(telefono);
+            }
         }
     }
 
+/*
     @Override
     public void eliminarUsuario(String numeroDocumento) throws SQLException {
         try (Connection connection = conexion.getConexion();
@@ -74,8 +100,8 @@ public class UsuarioDAOIMPLEMENTACION implements UsuarioDAO {
         }
     }
 
-    @Override
-    public Usuario obtenerUsuario(String identificador, int tipoIdentificador) throws SQLException {
+
+   /* public Usuario obtenerUsuario(String identificador, int tipoIdentificador) throws SQLException {
         String campoIdentificador;
         switch (tipoIdentificador) {
             case 1:
@@ -102,7 +128,7 @@ public class UsuarioDAOIMPLEMENTACION implements UsuarioDAO {
                     usuario.setNombres(rs.getString("nombre"));
                     usuario.setApellidos(rs.getString("apellido"));
                     usuario.setEmail(rs.getString("correo"));
-                    usuario.setDomicilio(rs.getString("id_direccion"));
+                    usuario.getDomicilio(rs.getInt("id_direccion"));
                     usuario.setEstado(rs.getString("id_estado"));
                     usuario.setId(rs.getInt("id_perfil"));
                     return usuario;
@@ -133,5 +159,5 @@ public class UsuarioDAOIMPLEMENTACION implements UsuarioDAO {
             }
         }
         return usuarios;
-    }
+    } */
 }

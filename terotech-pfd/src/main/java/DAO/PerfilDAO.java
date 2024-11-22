@@ -4,6 +4,8 @@ import MODELO.Perfil;
 import java.util.List;
 
 public interface PerfilDAO {
+
+    /*
     void agregarPerfil(Perfil perfil);
     Perfil obtenerPerfilPorNombre(String nombre);
     List<Perfil> obtenerTodosLosPerfiles();
@@ -11,6 +13,6 @@ public interface PerfilDAO {
     void eliminarPerfil(String nombre);
     int retornarPerfilUsuario(int documento);
 
-
+*/
 }
 

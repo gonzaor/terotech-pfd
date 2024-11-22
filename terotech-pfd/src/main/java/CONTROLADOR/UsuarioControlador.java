@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public class UsuarioControlador {
+   /*
     private UsuarioDAO usuarioDAO;
 
     public UsuarioControlador() {
@@ -20,11 +21,11 @@ public class UsuarioControlador {
     }
 
     public Usuario obtenerUsuarioPorId(String numeroDocumento) {
-        return usuarioDAO.obtenerPornumeroDocumento(numeroDocumento);
+        return usuarioDAO.(numeroDocumento);
     }
 
     public List<Usuario> obtenerTodosLosUsuarios() {
-        return usuarioDAO.obtenerTodos();
+        return usuarioDAO.obtenerTodosLosUsuarios();
     }
 
     public void modificarUsuario(Usuario usuarioModificado) {
@@ -34,4 +35,7 @@ public class UsuarioControlador {
     public void eliminarUsuario(String numeroDocumento) {
         usuarioDAO.eliminar(numeroDocumento);
     }
+
+*/
 }
+

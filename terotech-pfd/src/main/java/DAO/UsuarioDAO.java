@@ -9,11 +9,13 @@ import java.sql.SQLException;
 
 public interface UsuarioDAO {
     void agregarUsuario(Usuario usuario) throws SQLException;
+
+   /*
     void eliminarUsuario(String numeroDocumento) throws SQLException;
     void actualizarUsuario(String campoAModificar, String nuevoValor, String identificadorUsuario, int tipoIdentificador) throws SQLException;
     Usuario obtenerUsuario(String identificador, int tipoIdentificador) throws SQLException;
     List<Usuario> obtenerTodosLosUsuarios() throws SQLException;
-
+*/
 
 
 }

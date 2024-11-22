@@ -22,6 +22,7 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
         }
     }
 
+    /*
     @Override
     public void agregarPerfil(Perfil perfil) {
     }
@@ -42,6 +43,6 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
 
     @Override
     public void eliminarPerfil(String nombre) {
-    }
+    } */
 }
 
