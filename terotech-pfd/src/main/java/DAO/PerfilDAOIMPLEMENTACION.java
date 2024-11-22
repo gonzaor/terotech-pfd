@@ -43,5 +43,10 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
     @Override
     public void eliminarPerfil(String nombre) {
     }
+
+    @Override
+    public int retornarPerfilUsuario(int documento) {
+        return 0;
+    }
 }
 
