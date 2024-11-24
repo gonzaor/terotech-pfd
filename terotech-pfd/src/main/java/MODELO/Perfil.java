@@ -17,6 +17,10 @@ public class Perfil {
         this.usuarios = usuarios;
     }
 
+    public Perfil () {
+
+    }
+
     public Long getId() {
         return id;
     }

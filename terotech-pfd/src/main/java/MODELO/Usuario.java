@@ -20,6 +20,7 @@ public class Usuario {
     private boolean manejaLenguajeDeSenias;
     private Subcomision subcomision;
     private String estado;
+    private List<Perfil> perfiles;
 
     public int getId(int id) {
         return this.id;
@@ -159,6 +160,14 @@ public class Usuario {
 
     public void setManejaLenguajeDeSenias(boolean manejaLenguajeDeSenias) {
         this.manejaLenguajeDeSenias = manejaLenguajeDeSenias;
+    }
+
+    public List<Perfil> getPerfiles() {
+        return perfiles;
+    }
+
+    public void setPerfiles(List<Perfil> perfiles) {
+        this.perfiles = perfiles;
     }
 
 //    hay que ver que onda entre esto y la base de datos
