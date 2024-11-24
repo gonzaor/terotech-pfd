@@ -9,8 +9,6 @@ import java.util.List;
 
 public class FuncionalidadDAOIMPLEMENTACION implements FuncionalidadDAO {
 
-    private static final String SELECT_TODAS = "SELECT * FROM FUNCIONALIDADES";
-    private static final String UPDATE_FUNCIONALIDAD = "UPDATE FUNCIONALIDADES SET descripcion = ?, estado = ? WHERE id_funcionalidad = ?";
     private static final String UPDATE_ESTADO = "UPDATE FUNCIONALIDADES SET estado = ? WHERE id_funcionalidad = ?";
     private static final String SELECT_FUNCIONALIDADES_POR_PERFIL = "SELECT f.* FROM FUNCIONALIDADES f " +
             "JOIN ACCESO a ON f.id_funcionalidad = a.id_funcionalidad " +
