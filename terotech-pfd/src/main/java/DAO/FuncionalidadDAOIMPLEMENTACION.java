@@ -9,7 +9,6 @@ import java.util.List;
 
 public class FuncionalidadDAOIMPLEMENTACION implements FuncionalidadDAO {
 
-    private static final String INSERT_FUNCIONALIDAD = "INSERT INTO FUNCIONALIDADES (nombre, descripcion, estado) VALUES (?, ?, ?)";
     private static final String SELECT_TODAS = "SELECT * FROM FUNCIONALIDADES";
     private static final String UPDATE_FUNCIONALIDAD = "UPDATE FUNCIONALIDADES SET descripcion = ?, estado = ? WHERE id_funcionalidad = ?";
     private static final String UPDATE_ESTADO = "UPDATE FUNCIONALIDADES SET estado = ? WHERE id_funcionalidad = ?";
@@ -18,12 +17,9 @@ public class FuncionalidadDAOIMPLEMENTACION implements FuncionalidadDAO {
             "WHERE a.id_perfil = ?";
     private static final String INSERT_FUNCIONALIDAD_PERFIL = "INSERT INTO ACCESO (id_perfil, id_funcionalidad) VALUES (?, ?)";
 
-    private static final String SELECT_FUNCIONALIDAD_POR_NOMBRE = "SELECT COUNT(*) FROM FUNCIONALIDADES WHERE nombre = ?";
-
     private static final String DELETE_FUNCIONALIDAD_PERFIL = "DELETE FROM ACCESO WHERE id_perfil = ? AND id_funcionalidad = ?";
 
-
-
+    private static final String SELECT_FUNCIONALIDAD_POR_NOMBRE = "SELECT COUNT(*) FROM FUNCIONALIDADES WHERE nombre_funcionalidad = ?";
 
     public boolean existeFuncionalidad(String nombre) throws SQLException {
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
@@ -31,52 +27,54 @@ public class FuncionalidadDAOIMPLEMENTACION implements FuncionalidadDAO {
             preparedStatement.setString(1, nombre);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                return true;
+                return true; // Existe funcionalidad con ese nombre
             }
         }
-        return false;
+        return false; // No existe
     }
 
     @Override
     public void agregarFuncionalidad(Funcionalidad funcionalidad) throws SQLException {
-        // Verificar si la funcionalidad ya existe
         if (existeFuncionalidad(funcionalidad.getNombre())) {
             throw new SQLException("Ya existe una funcionalidad con ese nombre.");
         }
 
+        String query = "INSERT INTO FUNCIONALIDADES (nombre_funcionalidad, descripcion, estado) VALUES (?, ?, ?)";
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_FUNCIONALIDAD)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, funcionalidad.getNombre());
             preparedStatement.setString(2, funcionalidad.getDescripcion());
-            preparedStatement.setBoolean(3, funcionalidad.isEstado());
+            preparedStatement.setString(3, funcionalidad.isEstado() ? "activo" : "inactivo");  // Usamos 'activo'/'inactivo' como texto
             preparedStatement.executeUpdate();
         }
     }
 
-    @Override
+
+
     public List<Funcionalidad> listar() throws SQLException {
         List<Funcionalidad> funcionalidades = new ArrayList<>();
+        String query = "SELECT * FROM FUNCIONALIDADES";
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_TODAS);
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
                 Funcionalidad funcionalidad = new Funcionalidad();
                 funcionalidad.setId(rs.getLong("id_funcionalidad"));
-                funcionalidad.setNombre(rs.getString("nombre"));
+                funcionalidad.setNombre(rs.getString("nombre_funcionalidad"));
                 funcionalidad.setDescripcion(rs.getString("descripcion"));
-                funcionalidad.setEstado(rs.getBoolean("estado"));
+                funcionalidad.setEstado(rs.getString("estado").equals("activo"));
                 funcionalidades.add(funcionalidad);
             }
         }
         return funcionalidades;
     }
 
-    @Override
     public void modificarFuncionalidad(Funcionalidad funcionalidad) throws SQLException {
+        String query = "UPDATE FUNCIONALIDADES SET descripcion = ?, estado = ? WHERE id_funcionalidad = ?";
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_FUNCIONALIDAD)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, funcionalidad.getDescripcion());
-            preparedStatement.setBoolean(2, funcionalidad.isEstado());
+            preparedStatement.setString(2, funcionalidad.isEstado() ? "activo" : "inactivo");  // Convertir a 'activo'/'inactivo'
             preparedStatement.setLong(3, funcionalidad.getId());
             preparedStatement.executeUpdate();
         }

@@ -25,7 +25,7 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
     private static final String SELECT_POR_NOMBRE = "SELECT COUNT(*) FROM PERFILES WHERE nombre_perfil = ?";
 
     @Override
-    public void agregarPerfil (Perfil perfil) throws SQLException {
+    public void agregarPerfil(Perfil perfil) throws SQLException {
         // Validar si ya existe el nombre del perfil
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
              PreparedStatement validationStatement = connection.prepareStatement(SELECT_POR_NOMBRE)) {
@@ -41,7 +41,7 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PERFIL)) {
             preparedStatement.setString(1, perfil.getNombre());
             preparedStatement.setString(2, perfil.getDescripcion());
-            preparedStatement.setBoolean(3, false);
+            preparedStatement.setString(3, perfil.getEstado());
             preparedStatement.executeUpdate();
         }
     }
@@ -57,7 +57,7 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
                 perfil.setId(rs.getLong("id_perfil"));
                 perfil.setNombre(rs.getString("nombre_perfil"));
                 perfil.setDescripcion(rs.getString("descripcion"));
-                perfil.setEstado(rs.getBoolean("estado"));
+                perfil.setEstado(rs.getString("estado"));
                 perfiles.add(perfil);
             }
         }
@@ -65,19 +65,19 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
     }
 
     @Override
-    public List<Perfil> listarFiltrado(String nombre, boolean estado) throws SQLException {
+    public List<Perfil> listarFiltrado(String nombre, String estado) throws SQLException {
         List<Perfil> perfiles = new ArrayList<>();
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FILTRADO)) {
             preparedStatement.setString(1, "%" + nombre + "%");
-            preparedStatement.setBoolean(2, estado);
+            preparedStatement.setString(2, estado);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     Perfil perfil = new Perfil();
                     perfil.setId(rs.getLong("id_perfil"));
                     perfil.setNombre(rs.getString("nombre_perfil"));
                     perfil.setDescripcion(rs.getString("descripcion"));
-                    perfil.setEstado(rs.getBoolean("estado"));
+                    perfil.setEstado(rs.getString("estado"));
                     perfiles.add(perfil);
                 }
             }
@@ -90,17 +90,17 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PERFIL)) {
             preparedStatement.setString(1, perfil.getDescripcion());
-            preparedStatement.setBoolean(2, perfil.getEstado());
+            preparedStatement.setString(2, perfil.getEstado());
             preparedStatement.setLong(3, perfil.getId());
             preparedStatement.executeUpdate();
         }
     }
 
     @Override
-    public void cambiarEstado(Long id, boolean nuevoEstado) throws SQLException {
+    public void cambiarEstado(Long id, String nuevoEstado) throws SQLException {
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ESTADO)) {
-            preparedStatement.setBoolean(1, nuevoEstado);
+            preparedStatement.setString(1, nuevoEstado);
             preparedStatement.setLong(2, id);
             preparedStatement.executeUpdate();
         }
@@ -116,28 +116,30 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
         }
     }
 
+
     public List<Perfil> obtenerPerfilesDeUsuario(int idUsuario) throws SQLException {
         List<Perfil> perfiles = new ArrayList<>();
         String query = "SELECT p.* FROM PERFILES p " +
                 "JOIN USUARIO_PERFIL up ON p.id_perfil = up.id_perfil " +
                 "WHERE up.id_usuario = ?";
+
         try (Connection connection = Conexion.obtenerInstancia().getConexion();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, idUsuario);
             ResultSet rs = preparedStatement.executeQuery();
+
             while (rs.next()) {
                 Perfil perfil = new Perfil();
                 perfil.setId(rs.getLong("id_perfil"));
                 perfil.setNombre(rs.getString("nombre_perfil"));
                 perfil.setDescripcion(rs.getString("descripcion"));
-                perfil.setEstado(rs.getBoolean("estado"));
+                perfil.setEstado(rs.getString("estado"));
                 perfiles.add(perfil);
             }
         }
         return perfiles;
+
+
     }
-
-
-
 }
 
