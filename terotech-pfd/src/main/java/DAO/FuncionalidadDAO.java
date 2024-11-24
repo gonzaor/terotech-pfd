@@ -1,16 +1,17 @@
 package DAO;
 
 import MODELO.Funcionalidad;
-import MODELO.Perfil;
-
+import java.sql.SQLException;
 import java.util.List;
 
 public interface FuncionalidadDAO {
-    void agregarFuncionalidad(Funcionalidad funcionalidad);
-    Funcionalidad obtenerPorId(Long id);
-    List<Funcionalidad> obtenerTodos();
-    void actualizar(Funcionalidad funcionalidad);
-    void eliminar(Long id);
-    void vincularFuncionalidadConPerfil(Funcionalidad funcionalidad, Perfil perfil);
+    void agregarFuncionalidad(Funcionalidad funcionalidad) throws SQLException;
+    List<Funcionalidad> listar() throws SQLException;
+    void modificarFuncionalidad(Funcionalidad funcionalidad) throws SQLException;
+    void cambiarEstado(Long id, boolean nuevoEstado) throws SQLException;
+    List<Funcionalidad> obtenerFuncionalidadesPorPerfil(int idPerfil) throws SQLException;
+    void agregarFuncionalidadAPerfil (int idPerfil, int idFuncionalidad) throws SQLException;
 
+   void eliminarFuncionalidadDePerfil (int idPerfil, int idFuncionalidad) throws SQLException;
 }
+
