@@ -28,16 +28,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public void create(Usuario usuario) throws SQLException {
         Connection connection = conexion.getConexion();
         try {
-            connection.setAutoCommit(false); // Iniciar transacción
-            System.out.println("Transacción iniciada en create().");
+            connection.setAutoCommit(false);
 
             // Insertar Dirección
             Direccion retornoDir = direccionDAO.agregarDireccion(connection, usuario.getDomicilio());
             usuario.getDomicilio().setIdDireccion(retornoDir.getIdDireccion());
-            System.out.println("Dirección insertada con ID: " + retornoDir.getIdDireccion());
 
             // Insertar Usuario
-            String sql = "INSERT INTO USUARIOS (tipo_documento, nro_documento, nombre, apellido, fecha_nacimiento, correo, contrasena, id_direccion, estado, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO USUARIOS (tipo_documento, nro_documento, nombre, apellido, fecha_nacimiento, " +
+                    "correo, contrasena, id_direccion, estado, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, usuario.getTipoDocumento());
                 ps.setInt(2, usuario.getNumeroDocumento());
@@ -50,13 +50,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 ps.setString(9, usuario.getEstado());
                 ps.setString(10, usuario.getTipoUsuario());
                 ps.executeUpdate();
-                System.out.println("Usuario insertado en la base de datos.");
 
-                // Obtener ID generado para el usuario
                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         usuario.setId(generatedKeys.getInt(1));
-                        System.out.println("Usuario creado con ID: " + usuario.getId());
                     } else {
                         throw new SQLException("No se pudo obtener el ID del usuario insertado.");
                     }
@@ -67,18 +64,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             for (Telefono telefono : usuario.getTelefonos()) {
                 telefono.setIdUsuario(usuario.getId());
                 telefonoDAO.agregarTelefono(connection, telefono);
-                System.out.println("Teléfono insertado con ID: " + telefono.getIdTelefono());
             }
 
-            connection.commit(); // Confirmar transacción
-            System.out.println("Transacción confirmada en create().");
+            connection.commit();
         } catch (SQLException e) {
-            connection.rollback(); // Revertir transacción en caso de error
-            System.err.println("Transacción revertida en create().");
+            connection.rollback();
             throw e;
         } finally {
-            connection.setAutoCommit(true); // Restaurar autoCommit
-            System.out.println("AutoCommit restaurado en create().");
+            connection.setAutoCommit(true);
         }
     }
 
@@ -92,6 +85,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    usuario = mapUsuarioFromResultSet(rs);
+                }
+            }
+        }
+
+        return usuario;
+    }
+
+    public Usuario readByDocumento(int numeroDocumento) throws SQLException {
+        Connection connection = conexion.getConexion();
+        String sql = "SELECT * FROM USUARIOS WHERE nro_documento = ?";
+        Usuario usuario = null;
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, numeroDocumento);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    usuario = mapUsuarioFromResultSet(rs);
                     usuario = new Usuario();
                     usuario.setId(rs.getInt("id_usuario"));
                     usuario.setTipoDocumento(rs.getString("tipo_documento"));
@@ -125,15 +136,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public void update(Usuario usuario) throws SQLException {
         Connection connection = conexion.getConexion();
         try {
-            connection.setAutoCommit(false); // Iniciar transacción
-            System.out.println("Transacción iniciada en update().");
+            connection.setAutoCommit(false);
 
             // Actualizar Dirección
             direccionDAO.actualizarDireccion(connection, usuario.getDomicilio());
-            System.out.println("Dirección actualizada para el usuario ID: " + usuario.getId());
 
             // Actualizar Usuario
-            String sql = "UPDATE USUARIOS SET tipo_documento = ?, nro_documento = ?, nombre = ?, apellido = ?, fecha_nacimiento = ?, correo = ?, contrasena = ?, id_direccion = ?, estado = ?, tipo_usuario = ? WHERE id_usuario = ?";
+            String sql = "UPDATE USUARIOS SET tipo_documento = ?, nro_documento = ?, nombre = ?, apellido = ?, " +
+                    "fecha_nacimiento = ?, correo = ?, contrasena = ?, id_direccion = ?, estado = ?, tipo_usuario = ? " +
+                    "WHERE id_usuario = ?";
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, usuario.getTipoDocumento());
                 ps.setInt(2, usuario.getNumeroDocumento());
@@ -147,29 +158,31 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 ps.setString(10, usuario.getTipoUsuario());
                 ps.setInt(11, usuario.getId());
                 ps.executeUpdate();
-                System.out.println("Usuario actualizado en la base de datos con ID: " + usuario.getId());
             }
 
-            // Eliminar Teléfonos Existentes
+            // Eliminar y Reinsertar Teléfonos
             telefonoDAO.eliminarTelefonosPorUsuario(connection, usuario.getId());
-            System.out.println("Teléfonos existentes eliminados para el usuario ID: " + usuario.getId());
-
-            // Insertar Nuevos Teléfonos
             for (Telefono telefono : usuario.getTelefonos()) {
                 telefono.setIdUsuario(usuario.getId());
                 telefonoDAO.agregarTelefono(connection, telefono);
-                System.out.println("Teléfono insertado con ID: " + telefono.getIdTelefono());
             }
 
-            connection.commit(); // Confirmar transacción
-            System.out.println("Transacción confirmada en update().");
+            connection.commit();
         } catch (SQLException e) {
-            connection.rollback(); // Revertir transacción en caso de error
-            System.err.println("Transacción revertida en update().");
+            connection.rollback();
             throw e;
         } finally {
-            connection.setAutoCommit(true); // Restaurar autoCommit
-            System.out.println("AutoCommit restaurado en update().");
+            connection.setAutoCommit(true);
+        }
+    }
+
+    public void updateByDocumento(int numeroDocumento, Usuario usuarioNuevo) throws SQLException {
+        Usuario usuarioExistente = readByDocumento(numeroDocumento);
+        if (usuarioExistente != null) {
+            usuarioNuevo.setId(usuarioExistente.getId());
+            update(usuarioNuevo);
+        } else {
+            throw new SQLException("Usuario con documento " + numeroDocumento + " no encontrado.");
         }
     }
 
@@ -180,7 +193,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Usuario desactivado con ID: " + id);
+        }
+    }
+
+    public void deactivateByDocumento(int numeroDocumento) throws SQLException {
+        Usuario usuario = readByDocumento(numeroDocumento);
+        if (usuario != null) {
+            deactivate(usuario.getId());
+        } else {
+            throw new SQLException("Usuario con documento " + numeroDocumento + " no encontrado.");
         }
     }
 
@@ -193,8 +214,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                int idUsuario = rs.getInt("id_usuario");
-                Usuario usuario = read(idUsuario);
+                Usuario usuario = mapUsuarioFromResultSet(rs);
                 if (usuario != null) {
                     usuarios.add(usuario);
                 }
@@ -202,5 +222,48 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
 
         return usuarios;
+    }
+
+    @Override
+    public String login(String email, String password) throws SQLException {
+        Connection connection = conexion.getConexion();
+        String sql = "SELECT tipo_usuario FROM USUARIOS WHERE correo = ? AND contrasena = ? AND estado = 'activo'";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("tipo_usuario");
+                } else {
+                    return null; // Credenciales inválidas
+                }
+            }
+        }
+    }
+
+
+    private Usuario mapUsuarioFromResultSet(ResultSet rs) throws SQLException {
+        Usuario usuario = new Usuario();
+        usuario.setId(rs.getInt("id_usuario"));
+        usuario.setTipoDocumento(rs.getString("tipo_documento"));
+        usuario.setNumeroDocumento(rs.getInt("nro_documento"));
+        usuario.setNombres(rs.getString("nombre"));
+        usuario.setApellidos(rs.getString("apellido"));
+        usuario.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+        usuario.setEmail(rs.getString("correo"));
+        usuario.setContrasena(rs.getString("contrasena"));
+        usuario.setEstado(rs.getString("estado"));
+        usuario.setTipoUsuario(rs.getString("tipo_usuario"));
+
+        // Obtener Dirección
+        int idDireccion = rs.getInt("id_direccion");
+        Direccion direccion = direccionDAO.obtenerDireccion(conexion.getConexion(), idDireccion);
+        usuario.setDomicilio(direccion);
+
+        // Obtener Teléfonos
+        List<Telefono> telefonos = telefonoDAO.obtenerTelefonosPorUsuario(conexion.getConexion(), usuario.getId());
+        usuario.setTelefonos(telefonos);
+
+        return usuario;
     }
 }

@@ -1,6 +1,8 @@
 package MODELO;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import DAO.*;
 
 
 public class Usuario {
@@ -156,7 +158,17 @@ public class Usuario {
     }
     public void modificar() { }
     public void eliminar() { }
-    public boolean login() { return true; }
     public void modificarDatosPropios() {  }
+
+    public String login(){
+
+        UsuarioDAOImpl usu = new UsuarioDAOImpl();
+        try {
+            return usu.login(this.email, this.contrasena);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }
