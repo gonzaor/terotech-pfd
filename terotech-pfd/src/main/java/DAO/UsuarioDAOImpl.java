@@ -37,7 +37,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             System.out.println("Dirección insertada con ID: " + retornoDir.getIdDireccion());
 
             // Insertar Usuario
-            String sql = "INSERT INTO USUARIOS (tipo_documento, nro_documento, nombre, apellido, fecha_nacimiento, correo, contraseña, id_direccion, estado, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO USUARIOS (tipo_documento, nro_documento, nombre, apellido, fecha_nacimiento, correo, contrasena, id_direccion, estado, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, usuario.getTipoDocumento());
                 ps.setInt(2, usuario.getNumeroDocumento());
@@ -100,7 +100,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                     usuario.setApellidos(rs.getString("apellido"));
                     usuario.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
                     usuario.setEmail(rs.getString("correo"));
-                    usuario.setContrasena(rs.getString("contraseña"));
+                    usuario.setContrasena(rs.getString("contrasena"));
                     usuario.setEstado(rs.getString("estado"));
                     usuario.setTipoUsuario(rs.getString("tipo_usuario"));
 
@@ -133,7 +133,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             System.out.println("Dirección actualizada para el usuario ID: " + usuario.getId());
 
             // Actualizar Usuario
-            String sql = "UPDATE USUARIOS SET tipo_documento = ?, nro_documento = ?, nombre = ?, apellido = ?, fecha_nacimiento = ?, correo = ?, contraseña = ?, id_direccion = ?, estado = ?, tipo_usuario = ? WHERE id_usuario = ?";
+            String sql = "UPDATE USUARIOS SET tipo_documento = ?, nro_documento = ?, nombre = ?, apellido = ?, fecha_nacimiento = ?, correo = ?, contrasena = ?, id_direccion = ?, estado = ?, tipo_usuario = ? WHERE id_usuario = ?";
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, usuario.getTipoDocumento());
                 ps.setInt(2, usuario.getNumeroDocumento());
