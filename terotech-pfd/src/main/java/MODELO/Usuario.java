@@ -8,53 +8,43 @@ public class Usuario {
     private String nombres;
     private String apellidos;
     private String tipoDocumento;
-    private String numeroDocumento;
+    private int numeroDocumento;
     private Date fechaNacimiento;
-    private String domicilio;
-    private List<String> telefonos;
+    private Direccion domicilio;
+    private List<Telefono> telefonos;
     private String email;
     private String contrasena;
-    private tipoUsuario tipoUsuario;
-    private CategoriaSocio categoriaSocio;
-    private boolean dificultadAuditiva;
-    private boolean manejaLenguajeDeSenias;
-    private Subcomision subcomision;
+    private String tipoUsuario; // 'socio', 'no-socio', 'administrativo'
     private String estado;
+    private String nombrePerfil;
+    private Perfil perfil;
 
-    public int getId(int id) {
-        return this.id;
+    public Usuario(){}
+
+
+    public Usuario(int id, String nombres, String apellidos, String tipoDocumento, int numeroDocumento, Date fechaNacimiento, Direccion domicilio, List<Telefono> telefonos, String email, String contrasena, String tipoUsuario, String estado, String nombrePerfil, Perfil perfil) {
+        this.id = id;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.fechaNacimiento = fechaNacimiento;
+        this.domicilio = domicilio;
+        this.telefonos = telefonos;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.tipoUsuario = tipoUsuario;
+        this.estado = estado;
+        this.nombrePerfil = nombrePerfil;
+        this.perfil = perfil;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    private String nombrePerfil;
-
-    public String getNombrePerfil() {
-        return this.nombrePerfil;
-    }
-
-    public void setNombrePerfil(String nombrePerfil) {
-        this.nombrePerfil = nombrePerfil;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    private Perfil perfil;
-
-    public Perfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
     }
 
     public String getNombres() {
@@ -81,11 +71,11 @@ public class Usuario {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public String getNumeroDocumento() {
+    public int getNumeroDocumento() {
         return numeroDocumento;
     }
 
-    public void setNumeroDocumento(String numeroDocumento) {
+    public void setNumeroDocumento(int numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
 
@@ -97,19 +87,19 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getDomicilio() {
+    public Direccion getDomicilio() {
         return domicilio;
     }
 
-    public void setDomicilio(String domicilio) {
+    public void setDomicilio(Direccion domicilio) {
         this.domicilio = domicilio;
     }
 
-    public List<String> getTelefonos() {
+    public List<Telefono> getTelefonos() {
         return telefonos;
     }
 
-    public void setTelefonos(List<String> telefonos) {
+    public void setTelefonos(List<Telefono> telefonos) {
         this.telefonos = telefonos;
     }
 
@@ -129,50 +119,43 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public tipoUsuario getTipoUsuario() {
+    public String getTipoUsuario() {
         return tipoUsuario;
     }
 
-    public void setTipoUsuario(tipoUsuario tipoUsuario) {
+    public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public CategoriaSocio getCategoriaSocio() {
-        return categoriaSocio;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCategoriaSocio(CategoriaSocio categoriaSocio) {
-        this.categoriaSocio = categoriaSocio;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public boolean isDificultadAuditiva() {
-        return dificultadAuditiva;
+    public String getNombrePerfil() {
+        return nombrePerfil;
     }
 
-    public void setDificultadAuditiva(boolean dificultadAuditiva) {
-        this.dificultadAuditiva = dificultadAuditiva;
+    public void setNombrePerfil(String nombrePerfil) {
+        this.nombrePerfil = nombrePerfil;
     }
 
-    public boolean isManejaLenguajeDeSenias() {
-        return manejaLenguajeDeSenias;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setManejaLenguajeDeSenias(boolean manejaLenguajeDeSenias) {
-        this.manejaLenguajeDeSenias = manejaLenguajeDeSenias;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
-//    hay que ver que onda entre esto y la base de datos
-//    deberian tener casi los mismos campos (lo necesito para terminar UsuarioDAO.agregarUsuario())
+    public void registrar() {
 
-    public Subcomision getSubcomision() {
-        return subcomision;
+
+
     }
-
-    public void setSubcomision(Subcomision subcomision) {
-        this.subcomision = subcomision;
-    }
-
-    public void registrar() { }
     public void modificar() { }
     public void eliminar() { }
     public boolean login() { return true; }

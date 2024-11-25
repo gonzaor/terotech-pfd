@@ -14,6 +14,8 @@ public class Funcionalidad {
         this.estado = false;
     }
 
+    public Funcionalidad() {};
+
     public Long getId() {
         return id;
     }
