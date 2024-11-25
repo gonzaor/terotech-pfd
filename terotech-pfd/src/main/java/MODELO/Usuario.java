@@ -8,7 +8,7 @@ public class Usuario {
     private String nombres;
     private String apellidos;
     private String tipoDocumento;
-    private String numeroDocumento;
+    private int numeroDocumento;
     private Date fechaNacimiento;
     private Direccion domicilio;
     private List<Telefono> telefonos;
@@ -18,6 +18,26 @@ public class Usuario {
     private String estado;
     private String nombrePerfil;
     private Perfil perfil;
+
+    public Usuario(){}
+
+
+    public Usuario(int id, String nombres, String apellidos, String tipoDocumento, int numeroDocumento, Date fechaNacimiento, Direccion domicilio, List<Telefono> telefonos, String email, String contrasena, String tipoUsuario, String estado, String nombrePerfil, Perfil perfil) {
+        this.id = id;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.fechaNacimiento = fechaNacimiento;
+        this.domicilio = domicilio;
+        this.telefonos = telefonos;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.tipoUsuario = tipoUsuario;
+        this.estado = estado;
+        this.nombrePerfil = nombrePerfil;
+        this.perfil = perfil;
+    }
 
     public int getId() {
         return id;
@@ -51,11 +71,11 @@ public class Usuario {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public String getNumeroDocumento() {
+    public int getNumeroDocumento() {
         return numeroDocumento;
     }
 
-    public void setNumeroDocumento(String numeroDocumento) {
+    public void setNumeroDocumento(int numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
 

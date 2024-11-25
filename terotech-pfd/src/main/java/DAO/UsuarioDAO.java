@@ -1,21 +1,13 @@
 package DAO;
+
 import MODELO.Usuario;
-import CONTROLADOR.Conexion;
-import java.util.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface UsuarioDAO {
-    void agregarUsuario(Usuario usuario) throws SQLException;
-
-   /*
-    void eliminarUsuario(String numeroDocumento) throws SQLException;
-    void actualizarUsuario(String campoAModificar, String nuevoValor, String identificadorUsuario, int tipoIdentificador) throws SQLException;
-    Usuario obtenerUsuario(String identificador, int tipoIdentificador) throws SQLException;
-    List<Usuario> obtenerTodosLosUsuarios() throws SQLException;
-*/
-
-
+    void create(Usuario usuario) throws SQLException; // Maneja direcciones y teléfonos
+    Usuario read(int id) throws SQLException;
+    void update(Usuario usuario) throws SQLException;
+    void deactivate(int id) throws SQLException;
+    List<Usuario> listAll() throws SQLException;
 }

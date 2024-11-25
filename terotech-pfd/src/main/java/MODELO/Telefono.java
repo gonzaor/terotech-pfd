@@ -8,6 +8,19 @@ public class Telefono {
     private long numero;
     private String tipoTelefono;
 
+    // Constructor vacío
+    public Telefono() {}
+
+    // Constructor completo
+    public Telefono(int idTelefono, int idUsuario, String pais, String localidad, long numero, String tipoTelefono) {
+        this.idTelefono = idTelefono;
+        this.idUsuario = idUsuario;
+        this.pais = pais;
+        this.localidad = localidad;
+        this.numero = numero;
+        this.tipoTelefono = tipoTelefono;
+    }
+
     // Getters y Setters
     public int getIdTelefono() {
         return idTelefono;
@@ -55,5 +68,17 @@ public class Telefono {
 
     public void setTipoTelefono(String tipoTelefono) {
         this.tipoTelefono = tipoTelefono;
+    }
+
+    @Override
+    public String toString() {
+        return "Telefono{" +
+                "idTelefono=" + idTelefono +
+                ", idUsuario=" + idUsuario +
+                ", pais='" + pais + '\'' +
+                ", localidad='" + localidad + '\'' +
+                ", numero=" + numero +
+                ", tipoTelefono='" + tipoTelefono + '\'' +
+                '}';
     }
 }

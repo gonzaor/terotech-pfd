@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Perfil {
 
-    private Long id;
+    private int id;
     private String nombre;
     private String descripcion;
     private String estado;
@@ -21,10 +21,10 @@ public class Perfil {
 
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
