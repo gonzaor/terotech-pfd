@@ -19,6 +19,7 @@ public class Usuario {
     private String nombrePerfil;
     private Perfil perfil;
 
+    public Usuario(int idUsuario){}
     public Usuario(){}
 
 
@@ -152,12 +153,10 @@ public class Usuario {
     }
 
     public void registrar() {
-
-
-
     }
     public void modificar() { }
     public void eliminar() { }
     public boolean login() { return true; }
     public void modificarDatosPropios() {  }
+
 }

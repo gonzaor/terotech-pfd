@@ -1,25 +1,31 @@
 package MODELO;
 
 import java.util.Date;
-import java.util.List;
 
 public class Pago {
 
-    private Long id;
+    private int id;
     private Date fecha;
     private Float monto;
     private Usuario usuario;
+    private String tipoPago;
+    private String formaPago;
 
-    public Pago(Date fecha, Float monto, Usuario usuario) {
+
+
+    public Pago(int id, Date fecha, Float monto, Usuario usuario, String tipoPago, String formaPago) {
         this.fecha = fecha;
         this.monto = monto;
         this.usuario = usuario;
+        this.tipoPago = tipoPago;
+        this.formaPago = formaPago;
+        this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,5 +49,14 @@ public class Pago {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public String getFormaPago() { return formaPago; }
+
+    public String getTipoPago() { return tipoPago; }
+
+    public void setTipoPago(String tipoPago) { this.tipoPago = tipoPago; }
+
+    public void setFormaPago(String formaPago) {this.formaPago = formaPago; }
+
 
 }
