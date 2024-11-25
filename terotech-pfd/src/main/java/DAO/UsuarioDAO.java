@@ -10,4 +10,5 @@ public interface UsuarioDAO {
     void update(Usuario usuario) throws SQLException;
     void deactivate(int id) throws SQLException;
     List<Usuario> listAll() throws SQLException;
+    String login(String email, String password ) throws SQLException;
 }
