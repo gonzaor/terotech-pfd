@@ -37,6 +37,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             // Insertar Usuario
             String sql = "INSERT INTO USUARIOS (tipo_documento, nro_documento, nombre, apellido, fecha_nacimiento, " +
                     "correo, contrasena, id_direccion, estado, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, usuario.getTipoDocumento());
                 ps.setInt(2, usuario.getNumeroDocumento());
@@ -102,6 +103,28 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     usuario = mapUsuarioFromResultSet(rs);
+                    usuario = new Usuario();
+                    usuario.setId(rs.getInt("id_usuario"));
+                    usuario.setTipoDocumento(rs.getString("tipo_documento"));
+                    usuario.setNumeroDocumento(rs.getInt("nro_documento"));
+                    usuario.setNombres(rs.getString("nombre"));
+                    usuario.setApellidos(rs.getString("apellido"));
+                    usuario.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+                    usuario.setEmail(rs.getString("correo"));
+                    usuario.setContrasena(rs.getString("contrasena"));
+                    usuario.setEstado(rs.getString("estado"));
+                    usuario.setTipoUsuario(rs.getString("tipo_usuario"));
+
+                    // Obtener Dirección
+                    int idDireccion = rs.getInt("id_direccion");
+                    Direccion direccion = direccionDAO.obtenerDireccion(connection, idDireccion);
+                    usuario.setDomicilio(direccion);
+                    System.out.println("Dirección obtenida para el usuario ID: " + id);
+
+                    // Obtener Teléfonos
+                    List<Telefono> telefonos = telefonoDAO.obtenerTelefonosPorUsuario(connection, id);
+                    usuario.setTelefonos(telefonos);
+                    System.out.println("Teléfonos obtenidos para el usuario ID: " + id);
                 }
             }
         }
