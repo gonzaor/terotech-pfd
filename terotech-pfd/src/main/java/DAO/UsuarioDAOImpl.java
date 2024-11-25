@@ -203,8 +203,21 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public String login(String email, String password) throws SQLException {
-        return "";
+        Connection connection = conexion.getConexion();
+        String sql = "SELECT tipo_usuario FROM USUARIOS WHERE correo = ? AND contrasena = ? AND estado = 'activo'";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("tipo_usuario");
+                } else {
+                    return null; // Credenciales inválidas
+                }
+            }
+        }
     }
+
 
     private Usuario mapUsuarioFromResultSet(ResultSet rs) throws SQLException {
         Usuario usuario = new Usuario();
