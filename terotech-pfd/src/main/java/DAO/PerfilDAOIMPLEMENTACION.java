@@ -54,7 +54,7 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
              ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
                 Perfil perfil = new Perfil();
-                perfil.setId(rs.getLong("id_perfil"));
+                perfil.setId(rs.getInt("id_perfil"));
                 perfil.setNombre(rs.getString("nombre_perfil"));
                 perfil.setDescripcion(rs.getString("descripcion"));
                 perfil.setEstado(rs.getString("estado"));
@@ -74,7 +74,7 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     Perfil perfil = new Perfil();
-                    perfil.setId(rs.getLong("id_perfil"));
+                    perfil.setId(rs.getInt("id_perfil"));
                     perfil.setNombre(rs.getString("nombre_perfil"));
                     perfil.setDescripcion(rs.getString("descripcion"));
                     perfil.setEstado(rs.getString("estado"));
@@ -130,7 +130,7 @@ public class PerfilDAOIMPLEMENTACION implements PerfilDAO {
 
             while (rs.next()) {
                 Perfil perfil = new Perfil();
-                perfil.setId(rs.getLong("id_perfil"));
+                perfil.setId(rs.getInt("id_perfil"));
                 perfil.setNombre(rs.getString("nombre_perfil"));
                 perfil.setDescripcion(rs.getString("descripcion"));
                 perfil.setEstado(rs.getString("estado"));

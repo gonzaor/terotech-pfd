@@ -8,8 +8,7 @@ import java.sql.SQLException;
 public class Conexion {
     private static Conexion instanciaUnica;
     private Connection conexion;
-    private String url =
-            "jdbc:postgresql://localhost:5432/postgres";
+    private String url = "jdbc:postgresql://localhost:5432/terotech";
     private String usuario = "postgres";
     private String contraseña = "1234";
 

@@ -1,11 +1,4 @@
 package CONTROLADOR;
-import DAO.UsuarioDAO;
-import DAO.UsuarioDAOIMPLEMENTACION;
-import MODELO.Usuario;
-import MODELO.UsuarioFactory;
-
-import java.sql.Connection;
-import java.util.List;
 
 public class UsuarioControlador {
     private UsuarioDAO usuarioDAO;
